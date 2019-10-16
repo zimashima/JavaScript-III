@@ -142,9 +142,57 @@ Humanoid.prototype.greet = function (){
     Humanoid.call(this, heroAttrs)
   }
   Hero.prototype = Object.create(Humanoid.prototype)
+  Hero.prototype.sasukeee = function(enemy){
+    console.log(`\nSASUKEEEE!!!`) 
+    enemy.healthPoints = 0;
+    console.log(`${enemy.name}'s Health Point is now ${enemy.healthPoints}`)
+    console.log(`${enemy.name} was removed from the game. . .\n`)
+  }
   
   function Villain(villainAttrs){
-    Humanoid.call(this, heroAttrs)
+    Humanoid.call(this, villainAttrs)
   }
 
-  Hero.prototype = Object.create(Humanoid.prototype)
+  Villain.prototype = Object.create(Humanoid.prototype)
+  Villain.prototype.narutooo = function(enemy){
+    console.log(`\nNARUTOOOO!!!`) 
+    enemy.healthPoints = 0;
+    console.log(`${enemy.name}'s Health Point is now ${enemy.healthPoints}`)
+    console.log(`${enemy.name} was removed from the game. . . \n`)
+   }
+
+   const theHero = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 1,
+      width: 2,
+      height: 4,
+    },
+    healthPoints: 20,
+    name: 'Naruto',
+    team: 'Konoha Village',
+    weapons: [
+      'Shuriken',
+      'Chakra',
+    ],
+    language: 'Gibberish',
+  });
+
+  const theVillain = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 1,
+      width: 2,
+      height: 4,
+    },
+    healthPoints: 20,
+    name: 'Sasuke',
+    team: 'Sasuke-kun Team',
+    weapons: [
+      'Sword',
+      'Sharingan',
+    ],
+    language: 'Nonsense',
+  });
+
+  console.log(theHero.sasukeee(theVillain))
