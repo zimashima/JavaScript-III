@@ -42,9 +42,9 @@
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
 function GameObject(character){
-    this.createAt = character.createAt;
+    this.createdAt = character.createdAt;
     this.name = character.name;
-    this.dimensions = character.dimension;
+    this.dimensions = character.dimensions;
   }
 
 GameObject.prototype.destroy = function (){
@@ -57,7 +57,7 @@ function CharacterStats(thechar){
 }
 CharacterStats.prototype = Object.create(GameObject.prototype)
 CharacterStats.prototype.takeDamage = function(){
-  return `${this} took damage.`
+  return `${this.name} took damage.`
 }
 function Humanoid(char){
   this.team = char.team;
@@ -68,7 +68,7 @@ function Humanoid(char){
 Humanoid.prototype = Object.create(GameObject.prototype)
 Humanoid.prototype = Object.create(CharacterStats.prototype)
 Humanoid.prototype.greet = function (){
-  return `${this} offers a greeting in ${this.language}`
+  return `${this.name} offers a greeting in ${this.language}`
 }
 
 
@@ -121,7 +121,7 @@ Humanoid.prototype.greet = function (){
     ],
     language: 'Elvish',
   });
-
+  console.log(swordsman)
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
   console.log(swordsman.healthPoints); // 15
