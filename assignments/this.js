@@ -2,16 +2,16 @@
 * in your own words. explain the four principle for the "this" keyword below.
 *
 * 1. Window Binding
-
+Window binding is when you set a variable/value in global scope, but try to use `this` to call that variable.
 
 * 2. Implicit Binding
-
+It is when you use this inside of a scope or function. Very basic and is the most common use. 
 
 * 3. New Binding
-
+New binding allows you to create new objects using a Constructor function and 'new' command by using `this` inside Constructor function to pass on any values as set by the Constructor.
 
 * 4. Explicit Binding
-
+When you use call or apply method.
 
 * write out a code example of each explanation above
 
@@ -63,7 +63,7 @@ const mashima = new WhatJSDoes({
 })
 
 const chance = new WhatJSDoes({
-    name: 'Mashima',
+    name: 'Karen',
     section: 'WEB25',
     location: 'California USA',
     status: 'catatonic'
