@@ -65,7 +65,6 @@ function Humanoid(char){
   this.language = char.language;
   CharacterStats.call(this, char);
 }
-Humanoid.prototype = Object.create(GameObject.prototype)
 Humanoid.prototype = Object.create(CharacterStats.prototype)
 Humanoid.prototype.greet = function (){
   return `${this.name} offers a greeting in ${this.language}`
@@ -138,3 +137,14 @@ Humanoid.prototype.greet = function (){
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+  function Hero(heroAttrs){
+    Humanoid.call(this, heroAttrs)
+  }
+  Hero.prototype = Object.create(Humanoid.prototype)
+  
+  function Villain(villainAttrs){
+    Humanoid.call(this, heroAttrs)
+  }
+
+  Hero.prototype = Object.create(Humanoid.prototype)
