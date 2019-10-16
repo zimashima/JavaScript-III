@@ -143,10 +143,16 @@ Humanoid.prototype.greet = function (){
   }
   Hero.prototype = Object.create(Humanoid.prototype)
   Hero.prototype.sasukeee = function(enemy){
-    console.log(`\nSASUKEEEE!!!`) 
-    enemy.healthPoints = 0;
-    console.log(`${enemy.name}'s Health Point is now ${enemy.healthPoints}`)
-    console.log(`${enemy.name} was removed from the game. . .\n`)
+    if (enemy.healthPoints > 0){
+      console.log(`${this.name} attacks ${enemy.name}`)
+      enemy.healthPoints = enemy.healthPoints - 5;
+      if (enemy.healthPoints <= 0){
+      console.log(`${enemy.name}'s Health Point is now 0`)
+      console.log(`RIP ${enemy.name}`)
+      } else {
+        console.log(`${enemy.name}'s Health Point is now ${enemy.healthPoints}`)
+      }
+    }
   }
   
   function Villain(villainAttrs){
@@ -155,12 +161,17 @@ Humanoid.prototype.greet = function (){
 
   Villain.prototype = Object.create(Humanoid.prototype)
   Villain.prototype.narutooo = function(enemy){
-    console.log(`\nNARUTOOOO!!!`) 
-    enemy.healthPoints = 0;
-    console.log(`${enemy.name}'s Health Point is now ${enemy.healthPoints}`)
-    console.log(`${enemy.name} was removed from the game. . . \n`)
-   }
-
+    if (enemy.healthPoints > 0){
+      console.log(`${this.name} attacks ${enemy.name}`)
+      enemy.healthPoints = enemy.healthPoints - 5;
+      if (enemy.healthPoints <= 0){
+      console.log(`${enemy.name}'s Health Point is now 0`)
+      console.log(`RIP ${enemy.name}`)
+      } else {
+        console.log(`${enemy.name}'s Health Point is now ${enemy.healthPoints}`)
+      }
+    }
+  }
    const theHero = new Hero({
     createdAt: new Date(),
     dimensions: {
@@ -194,5 +205,11 @@ Humanoid.prototype.greet = function (){
     ],
     language: 'Nonsense',
   });
-
-  console.log(theHero.sasukeee(theVillain))
+  theVillain.narutooo(theHero)
+  theHero.sasukeee(theVillain)
+  theVillain.narutooo(theHero)
+  theHero.sasukeee(theVillain)
+  theVillain.narutooo(theHero)
+  theHero.sasukeee(theVillain)
+  theVillain.narutooo(theHero)
+  theHero.sasukeee(theVillain)
