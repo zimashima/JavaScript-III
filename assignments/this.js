@@ -5,7 +5,7 @@
 Window binding is when you set a variable/value in global scope, but try to use `this` to call that variable.
 
 * 2. Implicit Binding
-It is when you use this inside of a scope or function. Very basic and is the most common use. 
+It is when you use `this` inside of a scope or function. Very basic and is the most common use. `this` will take the value of the object on the left of the dot when a function is invoked. The object is the one being passed in side of the function.
 
 * 3. New Binding
 New binding allows you to create new objects using a Constructor function and 'new' command by using `this` inside Constructor function to pass on any values as set by the Constructor.
@@ -22,16 +22,20 @@ function WhatJSDoes(attrs){
     this.section = attrs.section;
     this.location = attrs.location;
     this.status = attrs.status;
+    this.report = function(){
+        console.log(`A ${this.section} Lambda School Student found ${this.status} in ${this.location}. \nStudent's Name is ${this.name} and the cause of the student's condition seems to come from JavaScript.\n`)
+    }
 }
 
 // Principle 1
 
 // code example for Window Binding
+
 const firstname = 'Mashima'
 
 function whoDis(name){
     console.log(`Who dis?`)
-    console.log(this) // this doesn't really work
+    console.log(this) 
     return name
 }
 
@@ -41,15 +45,15 @@ whoDis(firstname)
 
 // code example for Implicit Binding
 
-function WhatJSDoes(attrs){
-    this.name = attrs.name;
-    this.section = attrs.section;
-    this.location = attrs.location;
-    this.status = attrs.status;
-    this.report = function(){
-        console.log(`A ${this.section} Lambda School Student found ${this.status} in ${this.location}. \n Student's Name is ${this.name} and the cause of the student's condition seems to come from JavaScript.\n`)
+const myTL = {
+    name: 'allie',
+    whoDis: function(){
+        console.log(`Who is my TL?`)
+        console.log(`It's ${this.name}`)
     }
 }
+
+myTL.whoDis()
 
 // Principle 3
 
@@ -62,7 +66,7 @@ const mashima = new WhatJSDoes({
     status: 'barely alive'
 })
 
-const chance = new WhatJSDoes({
+const karen = new WhatJSDoes({
     name: 'Karen',
     section: 'WEB25',
     location: 'California USA',
@@ -70,10 +74,10 @@ const chance = new WhatJSDoes({
 })
 
 mashima.report()
-chance.report()
+karen.report()
 
 // Principle 4
 // code example for Explicit Binding
 
-chance.report.call(mashima)
-mashima.report.call(chance)
+karen.report.call(mashima)
+mashima.report.call(karen)
