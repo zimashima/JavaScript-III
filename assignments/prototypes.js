@@ -41,7 +41,36 @@
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
+function GameObject(character){
+    this.createdAt = character.createdAt;
+    this.name = character.name;
+    this.dimensions = character.dimensions;
+  }
+
+GameObject.prototype.destroy = function (){
+  return `${this.name} was removed from the game.`
+}
+
+function CharacterStats(thechar){
+  GameObject.call(this, thechar)
+  this.healthPoints = thechar.healthPoints;
+}
+CharacterStats.prototype = Object.create(GameObject.prototype)
+CharacterStats.prototype.takeDamage = function(){
+  return `${this.name} took damage.`
+}
+function Humanoid(char){
+  this.team = char.team;
+  this.weapons = char.weapons;
+  this.language = char.language;
+  CharacterStats.call(this, char);
+}
+Humanoid.prototype = Object.create(CharacterStats.prototype)
+Humanoid.prototype.greet = function (){
+  return `${this.name} offers a greeting in ${this.language}`
+}
+
+
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -91,7 +120,7 @@
     ],
     language: 'Elvish',
   });
-
+  console.log(swordsman)
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
   console.log(swordsman.healthPoints); // 15
@@ -102,9 +131,85 @@
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
+
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+  function Hero(heroAttrs){
+    Humanoid.call(this, heroAttrs)
+  }
+  Hero.prototype = Object.create(Humanoid.prototype)
+  Hero.prototype.sasukeee = function(enemy){
+    if (enemy.healthPoints > 0){
+      console.log(`${this.name} attacks ${enemy.name}`)
+      enemy.healthPoints = enemy.healthPoints - 5;
+      if (enemy.healthPoints <= 0){
+      console.log(`${enemy.name}'s Health Point is now 0`)
+      console.log(`RIP ${enemy.name}`)
+      } else {
+        console.log(`${enemy.name}'s Health Point is now ${enemy.healthPoints}`)
+      }
+    }
+  }
+  
+  function Villain(villainAttrs){
+    Humanoid.call(this, villainAttrs)
+  }
+
+  Villain.prototype = Object.create(Humanoid.prototype)
+  Villain.prototype.narutooo = function(enemy){
+    if (enemy.healthPoints > 0){
+      console.log(`${this.name} attacks ${enemy.name}`)
+      enemy.healthPoints = enemy.healthPoints - 5;
+      if (enemy.healthPoints <= 0){
+      console.log(`${enemy.name}'s Health Point is now 0`)
+      console.log(`RIP ${enemy.name}`)
+      } else {
+        console.log(`${enemy.name}'s Health Point is now ${enemy.healthPoints}`)
+      }
+    }
+  }
+   const theHero = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 1,
+      width: 2,
+      height: 4,
+    },
+    healthPoints: 20,
+    name: 'Naruto',
+    team: 'Konoha Village',
+    weapons: [
+      'Shuriken',
+      'Chakra',
+    ],
+    language: 'Gibberish',
+  });
+
+  const theVillain = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 1,
+      width: 2,
+      height: 4,
+    },
+    healthPoints: 20,
+    name: 'Sasuke',
+    team: 'Sasuke-kun Team',
+    weapons: [
+      'Sword',
+      'Sharingan',
+    ],
+    language: 'Nonsense',
+  });
+  theVillain.narutooo(theHero)
+  theHero.sasukeee(theVillain)
+  theVillain.narutooo(theHero)
+  theHero.sasukeee(theVillain)
+  theVillain.narutooo(theHero)
+  theHero.sasukeee(theVillain)
+  theVillain.narutooo(theHero)
+  theHero.sasukeee(theVillain)
